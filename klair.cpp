@@ -41,6 +41,18 @@ void view(prodotto v[], int d)
 int search(prodotto p, prodotto v[], int d)
 {
 	//restituisce la posizione del prodotto
+	
+	for(int i=0;i<d;i++)
+	{
+		if(v[i].nome_prod==p.nome_prod)
+		{
+			return i; // il return funzione come il break. Se lo trova, esce dalla funzione
+		}
+	}
+	
+	return -1;//se non lo trova, finisce il ciclo e fa return -1
+	
+	
 }
 
 bool erase(prodotto p, prodotto v[], int d)
@@ -97,10 +109,11 @@ int main(int argc, char** argv) {
 				}while(p.prezzo<=0); //se il prezzo è minore di zero, non esce fuori dal ciclo
 	
                 add(p,supermercato,dim);
-                }
                 
                 cout<<"\n\n\n";
+                }
                 break;
+                
             case 2:
 				{
 				//Cancellazione
@@ -126,7 +139,16 @@ int main(int argc, char** argv) {
             case 5:
             	{
 				//Ricerca
+				cout<<"Inserire il nome del prodotto da ricercare: ";
+				getline(cin,p.nome_prod);
                 int pos=search(p,supermercato,dim);
+                if(pos==-1)
+                {
+                cout<<"\n\nProdotto non trovato.";		
+                }else
+                {
+                	cout<<"Il prodotto si trova in posizione "<<pos<<endl<<endl;
+ 				}
                 break;
                 }
 
