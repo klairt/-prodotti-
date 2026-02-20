@@ -21,9 +21,21 @@ void add(prodotto p, prodotto v[], int &d)
 	d++; //incrementa la dimensione
 }
 
-prodotto view(prodotto v[], int d)
+void view(prodotto v[], int d)
 {
-	//visualizza un prodotto
+	cout<<"\n\nTabella prodotti\n";
+	for(int i=0;i<d;i++)
+	{	
+		cout<<"prodotto "<<i+1<<": ";
+		cout<<"             ";
+		cout<<v[i].nome_prod;
+		cout<<"             ";
+		cout<<v[i].categoria;
+		cout<<"             ";
+		cout<<v[i].prezzo<<endl;
+	}
+	cout<<endl<<endl;
+	
 }
 
 int search(prodotto p, prodotto v[], int d)
@@ -85,8 +97,10 @@ int main(int argc, char** argv) {
 				}while(p.prezzo<=0); //se il prezzo è minore di zero, non esce fuori dal ciclo
 	
                 add(p,supermercato,dim);
-                break;
                 }
+                
+                cout<<"\n\n\n";
+                break;
             case 2:
 				{
 				//Cancellazione
@@ -104,8 +118,9 @@ int main(int argc, char** argv) {
             case 4:
             	{
 				//Visualizzazione
-                prodotto visualizzazione=view(supermercato,dim);
-                break;
+                
+				view(supermercato,dim);
+                
                 }
                 
             case 5:
