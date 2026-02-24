@@ -21,20 +21,18 @@ void add(prodotto p, prodotto v[], int &d)
 	d++; //incrementa la dimensione
 }
 
-void view(prodotto v[], int d)
+string view(prodotto v[], int d)
 {
+	string s;
 	cout<<"\n\nTabella prodotti\n";
 	for(int i=0;i<d;i++)
 	{	
-		cout<<"prodotto "<<i+1<<": ";
-		cout<<"             ";
-		cout<<v[i].nome_prod;
-		cout<<"             ";
-		cout<<v[i].categoria;
-		cout<<"             ";
-		cout<<v[i].prezzo<<endl;
+		s+=v[i].nome_prod+"\t"; //\t serve come tab
+		s+=v[i].categoria+"\t";
+		s+=to_string(v[i].prezzo)+"\n"; \\converte foat in string
 	}
-	cout<<endl<<endl;
+	return s;
+
 	
 }
 
@@ -132,7 +130,8 @@ int main(int argc, char** argv) {
             	{
 				//Visualizzazione
                 
-				view(supermercato,dim);
+				string s=view(supermercato,dim);
+				cout<<s;
                 
                 }
                 
@@ -160,3 +159,4 @@ int main(int argc, char** argv) {
 
 	return 0;
 }
+
