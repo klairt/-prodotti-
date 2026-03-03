@@ -29,7 +29,7 @@ string view(prodotto v[], int d)
 	{	
 		s+=v[i].nome_prod+"\t"; //\t serve come tab
 		s+=v[i].categoria+"\t";
-		s+=to_string(v[i].prezzo)+"\n"; \\converte foat in string
+		//s+=to_string(v[i].prezzo)+"\n"; \\converte foat in string
 	}
 	return s;
 
@@ -55,12 +55,25 @@ int search(prodotto p, prodotto v[], int d)
 
 bool erase(prodotto p, prodotto v[], int d)
 {
-	//restituisce un booleano
+	
+
+
 }
 
 bool edit(prodotto p, prodotto v[], int d)
 {
-	//restituisce un booleano
+	
+	int pos=search(p,v,d);  //fa la ricerca del prodotto nell'array
+	
+	if(pos=-1)
+	{
+		return false;
+	}else
+	{
+		return true;
+	}
+	
+	
 }
 
 
@@ -114,22 +127,41 @@ int main(int argc, char** argv) {
                 
             case 2:
 				{
+				
 				//Cancellazione
+				cout<<"Inserire il nome del prodotto da eliminare: ";
+				getline(cin,p.nome_prod);
                 bool canc=erase(p,supermercato,dim);
+                
+                
                 break;
                 }
                 
             case 3:
 				{
 				//Modifica
+				cout<<"Inserire il nome del prodotto da modificare: ";
+				getline(cin,p.nome_prod);
                 bool risposta=edit(p,supermercato,dim);
+                
+                if(risposta==false)
+                {	
+                	cout<<"Prodotto non trovato."<<endl<<endl;
+				}else
+				{
+					prodotto s;
+                	cout<<"Inserire il nome del prodotto da inserire: ";
+                	getline(cin,s.nome_prod);
+                	p.nome_prod=s.nome_prod;
+				}
+                
                 break;
                 }
 
             case 4:
             	{
+				
 				//Visualizzazione
-                
 				string s=view(supermercato,dim);
 				cout<<s;
                 
@@ -141,14 +173,17 @@ int main(int argc, char** argv) {
 				cout<<"Inserire il nome del prodotto da ricercare: ";
 				getline(cin,p.nome_prod);
                 int pos=search(p,supermercato,dim);
-                if(pos==-1)
+                
+				if(pos==-1)
                 {
                 cout<<"\n\nProdotto non trovato.";		
                 }else
                 {
                 	cout<<"Il prodotto si trova in posizione "<<pos<<endl<<endl;
  				}
+ 				
                 break;
+                
                 }
 
             default: //Nel caso in cui l'utente sceglie un numero diverso
@@ -159,4 +194,3 @@ int main(int argc, char** argv) {
 
 	return 0;
 }
-
