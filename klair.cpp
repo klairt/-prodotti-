@@ -29,7 +29,7 @@ string view(prodotto v[], int d)
 	{	
 		s+=v[i].nome_prod+"\t"; //\t serve come tab
 		s+=v[i].categoria+"\t";
-		//s+=to_string(v[i].prezzo)+"\n"; \\converte foat in string
+		s+=to_string(v[i].prezzo)+"\n"; //converte foat in string
 	}
 	return s;
 
@@ -53,12 +53,11 @@ int search(prodotto p, prodotto v[], int d)
 	
 }
 
-bool erase(prodotto p, prodotto v[], int d)
+/*bool erase(prodotto p, prodotto v[], int d)
 {
-	
 
 
-}
+}*/
 
 bool edit(prodotto p, prodotto v[], int d)
 {
@@ -78,9 +77,38 @@ bool edit(prodotto p, prodotto v[], int d)
 
 
 
-int main(int argc, char** argv) {
+
+
+
+void inserimento_ordinato(prodotto p, prodotto v[], int &d)
+{
+	for(int i=0;i<d;i++)
+	{	
+		
+		if(v[i].nome_prod>p.nome_prod)
+		{	
+			prodotto temp;
+			temp=v[i];	
+			v[i]=p;
+			
+			for(int j=i;j<d;j++)
+			{	
+				v[j+1]=temp;
+				temp=v[j+2];
+				
+			}
+		}
+		d++;
+	}
+
 	
-	prodotto p;
+	
+}
+
+
+
+int main(int argc, char** argv) {
+
 	prodotto supermercato[100];
 	int dim=0;
 	int opzione=0;
@@ -93,6 +121,7 @@ int main(int argc, char** argv) {
         cout<<"3 - Modifica\n";
         cout<<"4 - Visualizzazione\n";
         cout<<"5 - Ricerca\n";
+        cout<<"6 - Inserimento ordinato\n";
         cout<<"Scegli opzione: ";
 
         cin>>opzione;
@@ -103,7 +132,7 @@ int main(int argc, char** argv) {
             case 1:
 				{ 
 				//Inserimento
-
+				prodotto p;
 				cout<<"\n\nInserire il prodotto.\n";
 				//inserisce il nome
 				cout<<"Inserire il nome del prodotto: ";
@@ -127,11 +156,11 @@ int main(int argc, char** argv) {
                 
             case 2:
 				{
-				
+				prodotto p;
 				//Cancellazione
 				cout<<"Inserire il nome del prodotto da eliminare: ";
 				getline(cin,p.nome_prod);
-                bool canc=erase(p,supermercato,dim);
+                //bool canc=erase(p,supermercato,dim);
                 
                 
                 break;
@@ -140,6 +169,8 @@ int main(int argc, char** argv) {
             case 3:
 				{
 				//Modifica
+				
+				prodotto p;
 				cout<<"Inserire il nome del prodotto da modificare: ";
 				getline(cin,p.nome_prod);
                 bool risposta=edit(p,supermercato,dim);
@@ -162,6 +193,7 @@ int main(int argc, char** argv) {
             	{
 				
 				//Visualizzazione
+				prodotto p;
 				string s=view(supermercato,dim);
 				cout<<s;
                 
@@ -170,6 +202,7 @@ int main(int argc, char** argv) {
             case 5:
             	{
 				//Ricerca
+				prodotto p;
 				cout<<"Inserire il nome del prodotto da ricercare: ";
 				getline(cin,p.nome_prod);
                 int pos=search(p,supermercato,dim);
@@ -185,10 +218,20 @@ int main(int argc, char** argv) {
                 break;
                 
                 }
-
+                
+            	case 6: 
+				{	
+					prodotto p;
+            		cout<<"Inserire il nome del prodotto da inserire: ";
+					getline(cin,p.nome_prod);
+					
+					inserimento_ordinato(p,supermercato,dim);	
+				  
+ 			    }
             default: //Nel caso in cui l'utente sceglie un numero diverso
             cout<<"\nOpzione non valida.\n\n";
         }
+        
     }while(opzione=!0);
 
 
